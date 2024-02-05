@@ -19,7 +19,8 @@ public class Bird : MonoBehaviour
     private AudioSource sound;
     private AudioSource eat;
     public Sprite start_sprite;
-    private bool hasPlayed = false;
+    private bool hasPlayed1 = false;
+    private bool hasPlayed2 = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +47,11 @@ public class Bird : MonoBehaviour
         {
             if (this.transform.position.y > -4.4)
             {
-                if (!hasPlayed)
+                if (!hasPlayed1)
                 {
-                    sound.volume = 0.3f;
+                    sound.volume = 1f;
                     sound.Play();
-                    hasPlayed = true;
+                    hasPlayed1 = true;
                 }
                 worm.GetComponent<WormMove>().in_control = false;
                 worm.GetComponent<Animator>().speed = 1f;
@@ -60,6 +61,12 @@ public class Bird : MonoBehaviour
             } else
             {
                 reached = true;
+                if (!hasPlayed2)
+                {
+                    eat.volume = 1f;
+                    eat.Play();
+                    hasPlayed2 = true;
+                }
                 main_camera.GetComponent<CinemachineVirtualCamera>().Follow = gameObject.transform;
                 main_camera.GetComponent<CinemachineVirtualCamera>().LookAt = gameObject.transform;
             }
@@ -102,7 +109,7 @@ public class Bird : MonoBehaviour
             
         } 
 
-        if (this.GetComponent<SpriteRenderer>().sprite == start_sprite && hasPlayed && in_control)
+        if (this.GetComponent<SpriteRenderer>().sprite == start_sprite && hasPlayed1 && in_control)
         {
             if (!wing.isPlaying)
             {

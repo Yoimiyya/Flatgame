@@ -54,6 +54,7 @@ public class poop : MonoBehaviour
                 
                 if (!hasPlayed1)
                 {
+                    pop_up.volume = 2;
                     pop_up.Play();
                     hasPlayed1 = true;
                 }
